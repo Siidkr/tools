@@ -8,11 +8,9 @@ export const INITIAL_SHEETS: SheetData[] = [
       pageNumber: 0,
       layout: 'cover',
       bgColor: 'bg-[#9f1239]', 
-      photos: [
-        { id: 'c1', url: 'https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=1000&auto=format&fit=crop', rotation: 0 }
-      ],
-      text: "Our Story",
-      subText: "Volume I: The Beginning",
+      photos: [], // Empty photos array for a text-only book cover
+      text: "HAPPY 5 MONTHSARY",
+      subText: "Our Love Story • Vol. 5",
       stickers: []
     },
     back: {

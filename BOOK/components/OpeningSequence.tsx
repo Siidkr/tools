@@ -3,9 +3,10 @@ import { Heart, ArrowRight } from 'lucide-react';
 
 interface OpeningSequenceProps {
   onOpen: () => void;
+  onMusicStart: () => void;
 }
 
-export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen }) => {
+export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusicStart }) => {
   // States: 'closed' -> 'opening' (flap moves) -> 'reading' (letter slides out) -> 'exiting' (fade out)
   const [stage, setStage] = useState<'closed' | 'opening' | 'reading' | 'exiting'>('closed');
 
@@ -22,6 +23,10 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen }) => {
 
   const handleEnterApp = (e: React.MouseEvent) => {
     e.stopPropagation();
+    
+    // Trigger music IMMEDIATELY on click to satisfy browser policies
+    onMusicStart();
+
     setStage('exiting');
     setTimeout(() => {
       onOpen();
@@ -57,7 +62,7 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen }) => {
         {/* ENVELOPE CONTAINER */}
         <div 
           onClick={handleOpenEnvelope}
-          className={`relative w-80 h-52 transition-all duration-700 transform ${stage === 'reading' ? 'translate-y-24' : 'cursor-pointer hover:scale-105'} ${stage === 'exiting' ? 'scale-110 opacity-0' : ''}`}
+          className={`relative w-80 h-52 transition-all duration-700 transform [perspective:1000px] ${stage === 'reading' ? 'translate-y-24' : 'cursor-pointer hover:scale-105'} ${stage === 'exiting' ? 'scale-110 opacity-0' : ''}`}
         >
           {/* 1. Envelope Inside (Liner/Back) */}
           <div className="absolute inset-0 bg-[#fce7f3] rounded-md shadow-2xl overflow-hidden border border-rose-100">
@@ -89,30 +94,30 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen }) => {
 
                 {/* Letter Text */}
                 <div className="font-hand text-gray-700 text-lg mt-4 space-y-4">
-                    <p className="font-bold text-2xl text-rose-600">My Dearest,</p>
+                    <p className="font-bold text-2xl text-rose-600">My Dearest, Nazala</p>
                     
                     <p>
-                        Welcome to our own little digital garden. I've collected our precious moments here—like pressing flowers in an old book—so they never fade.
+                        Nggak kerasa ya, time flies banget sejak kita bareng. Dari hal-hal kecil sampai momen random, semuanya jadi lebih seru karena ada kamu. Thanks for being here, for staying, and for making my days feel better.
                     </p>
                     
                     <p>
-                        Every page tells a part of our story, every photo holds a memory I cherish.
+                        being with you tuh rasanya simple tapi meaningful. Kita nggak selalu perfect, but we always try, and that’s what matters. Kamu bukan cuma pacar, tapi juga best partner, tempat cerita, tempat pulang, dan orang yang selalu aku pilih.
                     </p>
 
                     <p>
-                        Are you ready to walk down memory lane with me?
+                        Semoga ke depan kita makin solid, makin dewasa, dan makin banyak memories bareng. No drama, just us, growing together. Happy monthsary, Bebekuhh. Glad to have you in my life
                     </p>
 
                     <p className="text-right mt-8 text-rose-500 font-bold">
                         With all my love,<br/>
-                        Us
+                        Sidik
                     </p>
                 </div>
 
                 {/* Button */}
                 <button 
                     onClick={handleEnterApp}
-                    className="mt-auto self-center flex items-center gap-2 bg-emerald-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-emerald-700 transition-transform hover:scale-105 active:scale-95 group font-sans tracking-wide text-sm font-semibold uppercase mb-2"
+                    className="mt-auto self-center flex items-center gap-2 bg-emerald-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-emerald-700 transition-transform hover:scale-105 active:scale-95 group font-sans tracking-wide text-sm font-semibold uppercase mb-2 cursor-pointer z-[60]"
                 >
                     Begin Journey <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -136,7 +141,7 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen }) => {
 
           {/* 4. The Flap (Top Triangle) */}
           <div 
-            className={`absolute top-0 left-0 w-full h-0 z-40 transition-transform duration-700 ease-in-out origin-top ${stage !== 'closed' ? 'rotate-x-180 z-0' : 'z-40'}`}
+            className={`absolute top-0 left-0 w-full h-0 z-40 transition-all duration-700 ease-in-out origin-top ${stage !== 'closed' ? '[transform:rotateX(180deg)] z-0' : 'z-40'}`}
             style={{ transformStyle: 'preserve-3d' }}
           >
              {/* The Flap Border */}

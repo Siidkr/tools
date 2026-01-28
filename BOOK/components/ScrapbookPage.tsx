@@ -15,63 +15,57 @@ export const ScrapbookPage: React.FC<ScrapbookPageProps> = ({ data, isActive }) 
         {/* Fabric/Canvas Texture overlay */}
         <div className="absolute inset-0 opacity-40 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/canvas-orange.png')] mix-blend-overlay"></div>
         
-        {/* TULIP VINE BORDER */}
-        <div className="absolute inset-3 border-[2px] border-emerald-800/20 rounded-sm pointer-events-none z-20">
-             {/* Top Left Tulip Corner */}
-             <div className="absolute -top-2 -left-2 text-rose-400">
-                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-                     <path d="M10 10 Q 50 10, 50 50" stroke="#166534" strokeWidth="2" fill="none" />
-                     <path d="M10 10 Q 10 50, 50 50" stroke="#166534" strokeWidth="2" fill="none" />
-                     {/* Tulips */}
-                     <path d="M10 10 L 5 5 M 10 10 L 15 5" stroke="#166534" strokeWidth="2" />
-                     <circle cx="10" cy="10" r="4" className="fill-rose-500" />
-                     <circle cx="50" cy="50" r="4" className="fill-rose-500" />
-                     <circle cx="30" cy="30" r="3" className="fill-yellow-400" />
-                 </svg>
-             </div>
-             {/* Bottom Right Tulip Corner */}
-             <div className="absolute -bottom-2 -right-2 rotate-180 text-rose-400">
-                 <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-                     <path d="M10 10 Q 50 10, 50 50" stroke="#166534" strokeWidth="2" fill="none" />
-                     <path d="M10 10 Q 10 50, 50 50" stroke="#166534" strokeWidth="2" fill="none" />
-                     <circle cx="10" cy="10" r="4" className="fill-rose-500" />
-                     <circle cx="50" cy="50" r="4" className="fill-rose-500" />
-                     <circle cx="30" cy="30" r="3" className="fill-yellow-400" />
-                 </svg>
-             </div>
+        {/* VINTAGE BOOK BORDER (Gold-ish Frame) */}
+        <div className="absolute inset-4 border-[3px] border-yellow-600/40 rounded-sm pointer-events-none z-20">
+             <div className="absolute inset-1 border border-yellow-600/20 rounded-sm"></div>
+             
+             {/* Corner Ornaments */}
+             <div className="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-yellow-600/40 rounded-tl-sm"></div>
+             <div className="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-yellow-600/40 rounded-tr-sm"></div>
+             <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-yellow-600/40 rounded-bl-sm"></div>
+             <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-yellow-600/40 rounded-br-sm"></div>
         </div>
 
         {/* Cover Content */}
-        <div className="z-40 flex flex-col items-center text-center p-8 w-full relative">
+        <div className="z-40 flex flex-col items-center text-center p-8 w-full h-full justify-between py-16 relative">
           
-          {/* Main Title with Garden Theme */}
+          {/* Main Title with Book Effect */}
           {data.text && (
-            <div className="relative mb-4">
-                <h1 className="font-hand text-5xl md:text-7xl text-rose-50 tracking-widest relative z-50 font-bold" 
+            <div className="relative mt-4">
+                <h1 className="font-serif text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 to-yellow-600 tracking-widest relative z-50 font-bold uppercase" 
                     style={{ 
-                    textShadow: '2px 2px 0px rgba(22, 101, 52, 0.4)',
+                       filter: 'drop-shadow(0px 2px 0px rgba(0,0,0,0.5))',
+                       fontFamily: 'serif' 
                     }}>
-                {data.text}
+                    <span className="block text-3xl md:text-4xl mb-2 opacity-90 tracking-[0.2em] font-normal">Happy</span>
+                    <span className="block text-8xl md:text-9xl my-2 text-yellow-100 drop-shadow-md font-serif">5</span>
+                    <span className="block tracking-[0.3em] font-normal text-2xl md:text-3xl">Monthsary</span>
                 </h1>
-                <div className="absolute -bottom-2 w-full h-3 bg-rose-300/40 -rotate-1 rounded-full blur-[1px]"></div>
             </div>
           )}
 
-          {/* Subtitle */}
-          {data.subText && (
-            <div className="flex items-center gap-4 w-full justify-center mb-8 opacity-90 relative z-50">
-               <span className="text-emerald-200">~ 🌷 ~</span>
-               <p className="font-hand text-emerald-50 text-xl tracking-wide font-bold">{data.subText}</p>
-               <span className="text-emerald-200">~ 🌷 ~</span>
+          {/* Central Decorative Element (Replaces Photo) */}
+          {data.photos.length === 0 && (
+            <div className="flex-1 flex items-center justify-center w-full">
+                <div className="relative">
+                    {/* Wreath / Circle Decoration */}
+                    <div className="w-48 h-48 border-2 border-yellow-600/30 rounded-full flex items-center justify-center relative">
+                        <div className="absolute inset-0 border border-yellow-600/20 rounded-full m-1"></div>
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-24 h-24 text-yellow-600/60 drop-shadow-sm">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    {/* Side Flourishes */}
+                    <div className="absolute top-1/2 -left-12 -translate-y-1/2 w-10 h-[1px] bg-yellow-600/40"></div>
+                    <div className="absolute top-1/2 -right-12 -translate-y-1/2 w-10 h-[1px] bg-yellow-600/40"></div>
+                </div>
             </div>
           )}
 
-          {/* Central Photo/Window */}
+          {/* Photo fallback (if photo still exists in data) */}
           {data.photos.length > 0 && (
             <div className="relative p-3 bg-[#fdfbf7] rounded-sm shadow-2xl mb-8 transform rotate-1 hover:scale-[1.02] transition-transform duration-500 z-40">
-              {/* Tape on photo */}
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-rose-200/80 rotate-1 shadow-sm z-50"></div>
-              
               <div className="p-1 border border-gray-200">
                 <img 
                   src={data.photos[0].url} 
@@ -82,10 +76,14 @@ export const ScrapbookPage: React.FC<ScrapbookPageProps> = ({ data, isActive }) 
             </div>
           )}
 
-          {/* Bottom Copy/Decoration */}
-          <div className="mt-4 text-emerald-100/60 font-mono text-xs tracking-[0.3em] uppercase relative z-40">
-            A Garden of Memories
-          </div>
+          {/* Subtitle / Footer */}
+          {data.subText && (
+            <div className="flex flex-col items-center gap-2 w-full justify-center mb-4 opacity-80 relative z-50">
+               <div className="w-16 h-[2px] bg-yellow-600/40 rounded-full mb-2"></div>
+               <p className="font-serif text-yellow-100 text-lg tracking-[0.2em] font-medium uppercase">{data.subText}</p>
+            </div>
+          )}
+
         </div>
 
         {/* Stickers for Cover (background decoration) */}

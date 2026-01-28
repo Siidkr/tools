@@ -4,8 +4,8 @@ import { OpeningSequence } from './components/OpeningSequence';
 import { INITIAL_SHEETS } from './constants';
 import { Book, Info, Music, VolumeX } from 'lucide-react';
 
-// Gentle Romantic Piano Music
-const BGM_URL = "https://assets.mixkit.co/music/preview/mixkit-dreaming-big-31.mp3";
+// Using a reliable, direct MP3 link (Piano melody)
+const BGM_URL = "/Vietsub _ Last Night On Earth - Green Day _ Lyrics Video.mp3";
 
 // --- GARDEN BACKGROUND COMPONENT ---
 const GardenBackground: React.FC = () => {
@@ -146,29 +146,33 @@ const App: React.FC = () => {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.volume = 0.3; // Gentle volume
+        audioRef.current.volume = 0.5;
         audioRef.current.play().catch(e => console.log("Playback failed", e));
       }
       setIsPlaying(!isPlaying);
     }
   };
 
-  const handleStart = () => {
-    // User interaction (click) allows us to play audio without blocking
+  // Called immediately when user clicks "Begin Journey"
+  const handleMusicStart = () => {
     if (audioRef.current) {
-      audioRef.current.volume = 0.3;
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch((error) => {
-            console.log("Auto-play prevented:", error);
-            setIsPlaying(false);
-          });
-      }
+        audioRef.current.volume = 0.5;
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+            })
+            .catch((error) => {
+              console.log("Auto-play prevented:", error);
+              setIsPlaying(false);
+            });
+        }
     }
+  };
+
+  // Called after animation ends
+  const handleAppOpen = () => {
     setHasStarted(true);
   };
 
@@ -180,7 +184,7 @@ const App: React.FC = () => {
 
       {/* RENDER OPENING SEQUENCE OR APP */}
       {!hasStarted ? (
-        <OpeningSequence onOpen={handleStart} />
+        <OpeningSequence onOpen={handleAppOpen} onMusicStart={handleMusicStart} />
       ) : (
         <>
           {/* Header / Nav - Only visible after opening */}

@@ -12,7 +12,7 @@ interface FlipbookProps {
 const PAGE_FLIP_SFX = "https://assets.mixkit.co/active_storage/sfx/2413/2413-preview.mp3";
 
 // Placeholder Romantic Video URL
-const MEMORY_VIDEO_URL = "https://assets.mixkit.co/videos/preview/mixkit-couple-walking-beach-sunset-40342-large.mp4";
+const MEMORY_VIDEO_URL = "https://streamable.com/5rex20";
 
 export const Flipbook: React.FC<FlipbookProps> = ({ sheets }) => {
   const [currentSheetIndex, setCurrentSheetIndex] = useState(0);
@@ -74,7 +74,7 @@ export const Flipbook: React.FC<FlipbookProps> = ({ sheets }) => {
       {isAtEnd && !showVideo && (
         <div 
           onClick={() => setShowVideo(true)}
-          className="absolute top-0 md:-top-4 left-1/2 -translate-x-1/2 z-[90] animate-in slide-in-from-top-4 fade-in duration-700 cursor-pointer w-full max-w-[380px] px-4"
+          className="absolute top-0 md:-top-4 left-1/2 z-[90] animate-slide-down cursor-pointer w-full max-w-[380px] px-4"
         >
            <div className="bg-white/95 backdrop-blur-md rounded-[32px] p-4 shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-gray-100 flex items-center gap-3.5 transition-transform hover:scale-[1.02] active:scale-95 group">
               
@@ -99,7 +99,7 @@ export const Flipbook: React.FC<FlipbookProps> = ({ sheets }) => {
 
       {/* 2. Actual Video Player (Polaroid Style - appears when notification clicked) */}
       {showVideo && (
-        <div className="absolute top-2 md:top-6 left-1/2 -translate-x-1/2 z-[80] animate-in fade-in zoom-in-95 duration-500 w-full flex justify-center">
+        <div className="absolute top-2 md:top-6 left-1/2 z-[80] animate-zoom-in w-full flex justify-center">
            <div className="relative bg-white p-4 pb-16 shadow-2xl rounded-sm transform -rotate-1 w-[90vw] md:w-[600px] border border-gray-200">
               
               {/* Decorative Tape holding the video */}
