@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #000, #120012);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Lock Screen */
+#lockScreen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #1a001a, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.lock-box {
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.lock-box input {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+}
+
+.lock-box button {
+  margin-top: 10px;
+  padding: 8px 25px;
+  border-radius: 20px;
+  border: none;
+  background: hotpink;
+  color: white;
+  cursor: pointer;
+}
+
+/* Intro */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 998;
+  animation: fadeOut 3s forwards;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Book Pages */
+.page {
+  min-height: 100vh;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Cover */
+.cover {
+  background: linear-gradient(180deg, #000, #2a002a);
+}
+
+.cover-img {
+  width: 200px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+/* Timeline */
+.timeline-item {
+  margin: 10px 0;
+  padding: 10px 20px;
+  background: rgba(255,105,180,0.2);
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.timeline-item:hover {
+  transform: scale(1.08);
+}
+
+/* Gallery */
+.gallery {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 160px;
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.gallery img:hover {
+  transform: scale(1.1);
+}
+
+/* Countdown */
+#countdown {
+  font-size: 28px;
+  color: hotpink;
+  margin-top: 20px;
+}
+
+/* Ending */
+.ending h1 {
+  font-size: 40px;
+  color: pink;
+}
+
+/* Music Button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: hotpink;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0; visibility: hidden;}
+}

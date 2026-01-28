@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazala's Secret Garden ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root { 
+            --rose: #e11d48; 
+            --pink-soft: #fce7f3;
+            --sage: #84a98c;
+            --cream: #fefae0;
+            --gold: #d4a373;
+        }
+        
+        body { background-color: #fdfbf7; margin: 0; overflow: hidden; font-family: 'Montserrat', sans-serif; }
+        
+        /* Background Romantis dengan Gradasi Sunset */
+        #book-wrapper { 
+            display: flex; align-items: center; justify-content: center; height: 100vh; 
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 25%, #ff9a9e 50%, #fad0c4 75%, #ffd1ff 100%);
+            position: relative;
+            animation: bgShift 15s ease infinite;
+        }
+        
+        @keyframes bgShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(10deg); }
+        }
+        
+        /* Dekorasi Latar Belakang dengan Hati & Bunga */
+        #book-wrapper::before {
+            content: '💕'; font-size: 25rem; position: absolute; left: -8%; bottom: -12%; opacity: 0.08; transform: rotate(15deg); pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        #book-wrapper::after {
+            content: '💖'; font-size: 18rem; position: absolute; right: -5%; top: -8%; opacity: 0.08; transform: rotate(-20deg); pointer-events: none;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(15deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+        
+        /* Kertas dengan Tekstur Bunga Halus */
+        .page { 
+            background-color: var(--cream); 
+            background-image: url('https://www.transparenttextures.com/patterns/floral-linen.png');
+            box-shadow: inset 0 0 30px rgba(132, 169, 140, 0.2);
+            padding: 25px;
+            user-select: none;
+            border: 1px solid #cce3de;
+        }
+
+        /* Dekorasi Sudut Bunga (Corner) */
+        .corner-flower {
+            position: absolute; width: 60px; height: 60px;
+            background-size: contain; background-repeat: no-repeat;
+            opacity: 0.6; pointer-events: none; z-index: 2;
+        }
+        .top-left { top: 10px; left: 10px; transform: rotate(0deg); content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23db2777"><path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8Z"/></svg>'); }
+        .corner-deco::before { content: '🌺'; position: absolute; font-size: 2rem; top: 5px; left: 5px; opacity: 0.5; }
+        .corner-deco::after { content: '🌿'; position: absolute; font-size: 2rem; bottom: 5px; right: 5px; opacity: 0.5; transform: scaleX(-1); }
+
+        .polaroid { 
+            background: white; padding: 15px 15px 50px 15px; 
+            box-shadow: 2px 5px 15px rgba(0,0,0,0.1); 
+            width: 80%; transition: 0.5s ease-in-out;
+            position: relative; border: 1px solid #e2e8f0;
+            transform: rotate(-2deg);
+        }
+        /* Selotip Washi Tape Bermotif */
+        .washi-tape {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            width: 90px; height: 30px; 
+            background-color: #fecaca;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.5) 10px, rgba(255,255,255,0.5) 20px);
+            opacity: 0.8; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 10;
+        }
+
+        .page-content { 
+            height: 100%; 
+            border: 2px dashed var(--sage);
+            border-radius: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            position: relative; overflow: hidden;
+        }
+
+        /* Animasi Bunga Jatuh */
+        .falling-element { 
+            position: fixed; top: -10%; z-index: 999; pointer-events: none; 
+            animation: fall linear infinite; 
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        @keyframes fall { 
+            0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; } 
+            10% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; } 
+        }
+
+        /* Overlay Awal dengan Nuansa Romantis */
+        #overlay { 
+            position: fixed; inset: 0; 
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 50%, #ffdee9 100%);
+            z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1.2s; 
+            background-image: radial-gradient(circle, #db2777 1px, transparent 1px); 
+            background-size: 30px 30px;
+        }
+        .typing-container { font-family: 'Cinzel Decorative', cursive; color: #9d174d; font-size: 2.2rem; text-align: center; margin-bottom: 2rem; font-weight: bold; }
+        
+        .garden-btn { 
+            background: white; color: var(--sage); padding: 15px 40px; 
+            border: 2px solid var(--sage); border-radius: 50px;
+            font-family: 'Montserrat', sans-serif; font-weight: 600; letter-spacing: 2px;
+            cursor: pointer; opacity: 0; pointer-events: none; transition: 0.5s;
+            box-shadow: 0 5px 0 var(--sage);
+        }
+        .garden-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 var(--sage); background: #f0fdf4; }
+        .garden-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--sage); }
+        .btn-visible { opacity: 1 !important; pointer-events: auto !important; }
+
+        /* Typography */
+        h1 { font-family: 'Cinzel Decorative', cursive; color: var(--rose); text-shadow: 2px 2px 4px rgba(225, 29, 72, 0.2); }
+        h2 { font-family: 'Great Vibes', cursive; color: #1f2937; }
+        p { font-family: 'La Belle Aurore', cursive; color: #4b5563; }
+        
+        /* Hati Berdetak di Sudut */
+        .beating-heart {
+            position: fixed; font-size: 3rem; animation: heartbeat 1.5s ease-in-out infinite; z-index: 5; opacity: 0.6;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+        
+        /* Sparkle Effect */
+        .sparkle {
+            position: fixed; width: 4px; height: 4px; background: white; border-radius: 50%;
+            box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8); pointer-events: none; z-index: 100;
+            animation: sparkleAnim 1.5s ease-out forwards;
+        }
+        @keyframes sparkleAnim {
+            0% { opacity: 1; transform: scale(0) rotate(0deg); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; transform: scale(1.5) rotate(180deg); }
+        }
+        
+        /* Modal Video dengan Background Romantis */
+        #videoModal { background-color: rgba(255, 240, 245, 0.98); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+            <span class="text-[20rem] animate-pulse">💝</span>
+        </div>
+        <div class="relative z-10 text-center max-w-lg px-4">
+            <div id="typewriter" class="typing-container"></div>
+            <button id="main-btn" onclick="startEverything()" class="garden-btn">MASUK KE TAMAN</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop src="https://www.bensound.com/bensound-music/bensound-love.mp3"></audio>
+    <audio id="flipSound" src="images/small-page-103398.mp3"></audio>
+
+    <div id="videoModal" class="fixed inset-0 z-[20000] hidden flex-col items-center justify-center p-4">
+        <div class="relative w-full max-w-md bg-white p-4 rounded-xl shadow-2xl border-4 border-green-100">
+            <div class="absolute -top-6 -left-6 text-6xl">🌻</div>
+            <div class="absolute -bottom-6 -right-6 text-6xl">🌷</div>
+            
+            <video id="memoryVideo" class="w-full rounded-lg block">
+                <source src="images/us.MOV" type="video/mp4">
+            </video>
+            
+            <button onclick="closeVideo()" class="absolute -top-10 right-0 bg-white text-green-700 px-4 py-1 rounded-full shadow font-bold text-sm border border-green-200 hover:bg-green-50">
+                &times; TUTUP
+            </button>
+        </div>
+        <p class="mt-8 font-['Great_Vibes'] text-4xl text-green-800 animate-pulse">Cinta kita terus tumbuh...</p>
+    </div>
+
+    <div id="book-wrapper" class="hidden opacity-0 transition-opacity duration-1000">
+        <!-- Hati Berdetak di Sudut -->
+        <div class="beating-heart" style="top: 5%; left: 8%;">💗</div>
+        <div class="beating-heart" style="bottom: 8%; right: 10%; animation-delay: 0.5s;">💓</div>
+        <div class="beating-heart" style="top: 50%; left: 5%; animation-delay: 1s;">💕</div>
+        <div class="beating-heart" style="top: 30%; right: 7%; animation-delay: 1.5s;">💖</div>
+        
+        <div id="book">
+            
+            <div class="page" data-density="hard">
+                <div class="page-content" style="border: 4px double #be185d; background: #fff1f2;">
+                    <div class="absolute top-4 left-4 text-4xl opacity-70">🌹</div>
+                    <div class="absolute top-4 right-4 text-4xl opacity-70">🌹</div>
+                    <div class="absolute bottom-4 left-4 text-4xl opacity-70">🌹</div>
+                    <div class="absolute bottom-4 right-4 text-4xl opacity-70">🌹</div>
+                    
+                    <h1 class="text-3xl text-center mb-4 mt-8">The Garden of Us</h1>
+                    <div class="w-24 h-[2px] bg-rose-400 mb-6"></div>
+                    <h2 class="text-7xl mb-2 text-rose-600">Nazala</h2>
+                    <p class="text-2xl mt-4">Dimana cinta mekar setiap hari...</p>
+                    
+                    <div class="mt-12 text-6xl animate-bounce">💐</div>
+                </div>
+            </div>
+            
+            <div class="page">
+                <div class="page-content">
+                    <div class="corner-deco"></div>
+                    
+                    <div class="polaroid">
+                        <div class="washi-tape" style="background-color: #84a98c;"></div>
+                        <img src="images/2.jpeg" alt="Memory 1">
+                    </div>
+                    
+                    <div class="mt-8 text-center relative">
+                        <span class="absolute -top-4 -left-6 text-3xl">🦋</span>
+                        <p class="text-3xl font-bold text-slate-600">Senyummu...</p>
+                        <p class="text-xl text-slate-500">Lebih indah dari mawar manapun.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-content">
+                    <div class="corner-deco"></div>
+                    
+                    <div class="polaroid rotate-2">
+                        <div class="washi-tape" style="background-color: #f472b6;"></div>
+                        <img src="images/3.jpeg" alt="Memory 2">
+                    </div>
+                    
+                    <div class="mt-8 text-center relative">
+                        <span class="absolute -bottom-2 -right-8 text-3xl">🐝</span>
+                        <p class="text-3xl font-bold text-slate-600">Tawamu...</p>
+                        <p class="text-xl text-slate-500">Matahari bagi duniaku.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-content">
+                    <div class="corner-deco"></div>
+                    
+                    <div class="polaroid rotate-2">
+                        <div class="washi-tape" style="background-color: #f472b6;"></div>
+                        <img src="images/cover.jpeg" alt="Memory 3">
+                    </div>
+                    
+                    <div class="mt-8 text-center relative">
+                        <span class="absolute -bottom-2 -right-8 text-3xl">💕</span>
+                        <p class="text-3xl font-bold text-slate-600">Kebersamaan...</p>
+                        <p class="text-xl text-slate-500">Adalah anugerah terindah.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="page-content">
+                    <div class="corner-deco"></div>
+                    
+                    <div class="polaroid rotate-2">
+                        <div class="washi-tape" style="background-color: #f472b6;"></div>
+                        <img src="images/1.jpeg" alt="Memory 4">
+                    </div>
+                    
+                    <div class="mt-8 text-center relative">
+                        <span class="absolute -bottom-2 -right-8 text-3xl">💖</span>
+                        <p class="text-3xl font-bold text-slate-600">Bersama...</p>
+                        <p class="text-xl text-slate-500">Selamanya dalam hatiku.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" data-density="hard">
+                <div class="page-content" style="background: #f0fdf4;">
+                    <p class="text-2xl text-center px-6 leading-relaxed text-green-800">
+                        "Layaknya bunga yang butuh matahari, aku butuh kamu untuk terus tumbuh."
+                    </p>
+                    <div class="w-16 h-[1px] bg-green-400 my-8"></div>
+                    <p class="font-['Great_Vibes'] text-5xl text-rose-500">Forever Yours,</p>
+                    <div class="mt-10 text-5xl">🪴❤️</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const textLines = [
+            "Selamat datang, Nazala...",
+            "Di taman kecil kenangan kita.",
+            "Setiap bunga menceritakan kisahmu.",
+            "Siap untuk melihatnya mekar? 🌸"
+        ];
+
+        let lineIndex = 0; charIndex = 0;
+        const typewriterEl = document.getElementById('typewriter');
+        const mainBtn = document.getElementById('main-btn');
+
+        function typeEffect() {
+            if (lineIndex < textLines.length) {
+                if (charIndex < textLines[lineIndex].length) {
+                    typewriterEl.textContent += textLines[lineIndex].charAt(charIndex);
+                    charIndex++; 
+                    setTimeout(typeEffect, 70); 
+                } else {
+                    setTimeout(() => {
+                        if (lineIndex < textLines.length - 1) {
+                            typewriterEl.textContent = ""; 
+                            charIndex = 0; 
+                            lineIndex++; 
+                            typeEffect();
+                        } else { 
+                            mainBtn.classList.add('btn-visible'); 
+                        }
+                    }, 1500); 
+                }
+            }
+        }
+
+        window.onload = () => {
+            setTimeout(typeEffect, 1000);
+        };
+
+        function startEverything() {
+            document.getElementById('overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('overlay').style.display = 'none';
+                const wrapper = document.getElementById('book-wrapper');
+                wrapper.classList.remove('hidden');
+                setTimeout(() => wrapper.style.opacity = '1', 100);
+                
+                const music = document.getElementById('bgMusic');
+                music.volume = 0.4;
+                music.play().catch(e => console.log("Audio autoplay prevented"));
+
+                initFlipbook();
+                startFlowerRain();
+            }, 1000);
+        }
+
+        function initFlipbook() {
+            const screenWidth = window.innerWidth;
+            const bookWidth = screenWidth < 768 ? screenWidth * 0.85 : 420;
+            const bookHeight = screenWidth < 768 ? 520 : 600;
+
+            const pageFlip = new St.PageFlip(document.getElementById("book"), {
+                width: bookWidth, height: bookHeight,
+                size: "stretch", minWidth: 320, maxWidth: 450,
+                minHeight: 400, maxHeight: 600,
+                showCover: true, mobileScrollSupport: false
+            });
+
+            pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+            pageFlip.on('flip', (e) => {
+                document.getElementById('flipSound').play();
+                if(e.data === 3) {
+                    confetti({ 
+                        particleCount: 150, spread: 90, 
+                        colors: ['#e11d48', '#84a98c', '#fce7f3', '#fbbf24'],
+                        shapes: ['circle']
+                    });
+                    setTimeout(showVideoButton, 1500);
+                }
+            });
+        }
+
+        function showVideoButton() {
+            if(!document.getElementById('btn-video')) {
+                const btn = document.createElement('button');
+                btn.id = 'btn-video';
+                btn.innerHTML = "<span>🌻</span> Lihat Memori Mekar";
+                btn.className = "fixed bottom-12 left-1/2 -translate-x-1/2 bg-green-600 text-white px-8 py-3 rounded-full shadow-lg z-50 font-bold text-sm tracking-widest border-2 border-green-200 transition-all hover:scale-110 hover:bg-green-500";
+                btn.onclick = showVideo;
+                document.body.appendChild(btn);
+            }
+        }
+
+        function showVideo() {
+            const modal = document.getElementById('videoModal');
+            document.getElementById('bgMusic').volume = 0.1;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('memoryVideo').play();
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            document.getElementById('memoryVideo').pause();
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.getElementById('bgMusic').volume = 0.4;
+        }
+
+        function startFlowerRain() {
+            const elements = ['🌸', '🌺', '💕', '🌹', '💖', '🌷', '💗', '🌻', '💓', '🌼', '💝', '🍃', '🌿', '🦋', '✨'];
+            
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'falling-element';
+                el.textContent = elements[Math.floor(Math.random() * elements.length)];
+                
+                el.style.left = Math.random() * 100 + 'vw';
+                
+                const size = Math.random() * 20 + 15;
+                el.style.fontSize = size + 'px';
+                
+                const duration = Math.random() * 5 + 5;
+                el.style.animationDuration = duration + 's';
+                
+                el.style.opacity = Math.random() * 0.7 + 0.3;
+
+                document.body.appendChild(el);
+
+                setTimeout(() => {
+                    el.remove();
+                }, duration * 1000);
+
+            }, 400);
+        }
+        
+        // Fungsi Sparkle Effect saat klik
+        function createSparkle(x, y) {
+            for(let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                
+                const angle = (Math.PI * 2 * i) / 8;
+                const distance = 30 + Math.random() * 20;
+                sparkle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                sparkle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1500);
+            }
+        }
+        
+        // Event listener untuk sparkle saat klik
+        document.addEventListener('click', (e) => {
+            if(!document.getElementById('overlay').style.display || document.getElementById('overlay').style.display !== 'none') return;
+            createSparkle(e.clientX, e.clientY);
+        });
+        
+        // Fungsi kirim hati melayang saat hover polaroid
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const polaroids = document.querySelectorAll('.polaroid');
+                polaroids.forEach(pol => {
+                    pol.addEventListener('mouseenter', () => {
+                        const hearts = ['💕', '💖', '💗', '💓'];
+                        const heart = document.createElement('div');
+                        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                        heart.style.position = 'absolute';
+                        heart.style.fontSize = '2rem';
+                        heart.style.left = '50%';
+                        heart.style.bottom = '100%';
+                        heart.style.transform = 'translateX(-50%)';
+                        heart.style.pointerEvents = 'none';
+                        heart.style.animation = 'floatUp 2s ease-out forwards';
+                        pol.style.position = 'relative';
+                        pol.appendChild(heart);
+                        
+                        setTimeout(() => heart.remove(), 2000);
+                    });
+                });
+            }, 3000);
+        });
+        
+        // Animasi float up untuk hati
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% { opacity: 1; transform: translateX(-50%) translateY(0) scale(0.5); }
+                50% { opacity: 1; transform: translateX(-50%) translateY(-40px) scale(1); }
+                100% { opacity: 0; transform: translateX(-50%) translateY(-80px) scale(0.8); }
+            } 
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MemoryLane 3D Scrapbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              hand: ['"Indie Flower"', 'cursive'],
+              marker: ['"Patrick Hand"', 'cursive'],
+              caveat: ['"Caveat"', 'cursive'],
+            },
+            boxShadow: {
+              'book': '0 20px 40px -5px rgba(0, 0, 0, 0.4)',
+              'paper': '1px 1px 3px rgba(0,0,0,0.1)',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-6px)' },
+              },
+              wiggle: {
+                '0%, 100%': { transform: 'rotate(-3deg)' },
+                '50%': { transform: 'rotate(3deg)' },
+              },
+              sway: {
+                '0%, 100%': { transform: 'rotate(-6deg)' },
+                '50%': { transform: 'rotate(6deg)' },
+              },
+              twinkle: {
+                '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                '50%': { opacity: '0.8', transform: 'scale(0.95)' },
+              },
+              bloom: {
+                '0%': { opacity: '0', transform: 'scale(0) translateY(20px)' },
+                '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+              },
+              'float-slow': {
+                 '0%': { transform: 'translateY(-10vh) rotate(0deg)', opacity: '0' },
+                 '10%': { opacity: '0.8' },
+                 '100%': { transform: 'translateY(100vh) rotate(360deg)', opacity: '0' }
+              }
+            },
+            animation: {
+              float: 'float 3s ease-in-out infinite',
+              wiggle: 'wiggle 2s ease-in-out infinite',
+              sway: 'sway 4s ease-in-out infinite',
+              twinkle: 'twinkle 2s ease-in-out infinite',
+              'spin-slow': 'spin 12s linear infinite',
+              bloom: 'bloom 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+              'float-slow': 'float-slow 15s linear infinite',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #f0fdf4; /* Soft Garden Green */
+        background-image: 
+          radial-gradient(#dcfce7 2px, transparent 2px);
+        background-size: 32px 32px;
+        overflow: hidden; /* Prevent scroll on flip interactions */
+      }
+      .perspective-2000 {
+        perspective: 2000px;
+      }
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+      /* Custom scrollbar for text areas */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
