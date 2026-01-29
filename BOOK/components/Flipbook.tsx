@@ -12,7 +12,7 @@ interface FlipbookProps {
 const PAGE_FLIP_SFX = "https://assets.mixkit.co/active_storage/sfx/2413/2413-preview.mp3";
 
 // Placeholder Romantic Video URL
-const MEMORY_VIDEO_URL = "/us.MOV";
+const MEMORY_VIDEO_URL = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1769692681/us_fpfein.mov";
 
 export const Flipbook: React.FC<FlipbookProps> = ({ sheets }) => {
   const [currentSheetIndex, setCurrentSheetIndex] = useState(0);
