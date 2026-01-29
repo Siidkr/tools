@@ -38,8 +38,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       pattern: 'dots',
       bgColor: 'bg-white',
       photos: [
-        { id: 'p2_1', url: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=800&auto=format&fit=crop', rotation: 4, caption: "First Date" },
-        { id: 'p2_2', url: 'https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?q=80&w=800&auto=format&fit=crop', rotation: -3, caption: "Nervous!" }
+        { id: 'p2_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/v1769696708/IMG_3309_uvy58a.heic', rotation: 4, caption: "First Date" },
+        { id: 'p2_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/v1769696708/IMG_3313_fziy8r.heic', rotation: -3, caption: "Nervous!" }
       ],
       stickers: [
         { id: 's5', type: 'rose', content: '', x: 8, y: 12, rotation: -25, scale: 1.1 },
