@@ -4,14 +4,21 @@ import { ScrapbookPage } from './ScrapbookPage';
 import { WashiTape } from './Decorations';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
+// --- CONTOH CARA PAKAI VIDEO DARI FOLDER COMPONENTS (LOKAL) ---
+// 1. Simpan video Anda (misal: 'video-kita.mp4') di folder components ini.
+// 2. Uncomment (hapus //) baris import di bawah ini:
+// import MyLocalVideo from './video-kita.mp4';
+
 interface FlipbookProps {
   sheets: SheetData[];
 }
 
-// Sound effect URL (Paper slide/turn)
-const PAGE_FLIP_SFX = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1770935217/Vietsub___Last_Night_On_Earth_-_Green_Day___Lyrics_Video_yn5fmk.mp3";
+// Sound effect URL (Paper slide/turn) - Stable CDN Link
+const PAGE_FLIP_SFX = "https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73467.mp3";
 
-// Placeholder Romantic Video URL
+// Placeholder Romantic Video URL - User provided Cloudinary Link
+// JIKA MENGGUNAKAN VIDEO LOKAL DARI COMPONENTS:
+// Ubah baris di bawah menjadi: const MEMORY_VIDEO_URL = MyLocalVideo;
 const MEMORY_VIDEO_URL = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1769692681/us_fpfein.mov";
 
 export const Flipbook: React.FC<FlipbookProps> = ({ sheets }) => {

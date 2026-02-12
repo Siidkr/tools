@@ -2,22 +2,23 @@ import React, { useState, useRef, useMemo } from 'react';
 import { Flipbook } from './components/Flipbook';
 import { OpeningSequence } from './components/OpeningSequence';
 import { INITIAL_SHEETS } from './constants';
-import { Book, Info, Music, VolumeX } from 'lucide-react';
+import { Book, Info, Music, VolumeX, Heart } from 'lucide-react';
 
-// Using a reliable, direct MP3 link (Piano melody)
-const BGM_URL = "/Vietsub _ Last Night On Earth - Green Day _ Lyrics Video.mp3";
+// --- BACKGROUND MUSIC URL ---
+// Updated to user provided Cloudinary link: Green Day - Last Night On Earth
+const BGM_URL = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1770935217/Vietsub___Last_Night_On_Earth_-_Green_Day___Lyrics_Video_yn5fmk.mp3";
 
-// --- GARDEN BACKGROUND COMPONENT ---
-const GardenBackground: React.FC = () => {
-  // Generate random flowers for the bottom garden bed
-  const gardenFlowers = useMemo(() => {
-    const flowers = [];
-    const count = 15; // Number of flowers across the bottom
-    const types = ['tulip', 'daisy', 'sunflower', 'lavender'];
+// --- VALENTINE BACKGROUND COMPONENT ---
+const ValentineBackground: React.FC = () => {
+  // Generate random flowers/hearts for the bottom garden bed
+  const gardenItems = useMemo(() => {
+    const items = [];
+    const count = 18; // Number of items across the bottom
+    const types = ['rose', 'heart', 'tulip', 'heart_balloon'];
     
     for (let i = 0; i < count; i++) {
       const type = types[Math.floor(Math.random() * types.length)];
-      flowers.push({
+      items.push({
         id: i,
         type,
         left: `${(i / count) * 100 + (Math.random() * 5 - 2)}%`, // Distribute across width
@@ -26,54 +27,68 @@ const GardenBackground: React.FC = () => {
         duration: `${3 + Math.random() * 2}s` // Random sway speed
       });
     }
-    return flowers;
+    return items;
   }, []);
 
-  // Generate falling petals
-  const petals = useMemo(() => {
-    return [...Array(8)].map((_, i) => ({
+  // Generate falling hearts (instead of petals)
+  const floatingHearts = useMemo(() => {
+    return [...Array(12)].map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       delay: `${Math.random() * 10}s`,
+      duration: `${8 + Math.random() * 8}s`,
+      size: 15 + Math.random() * 20
+    }));
+  }, []);
+
+  // Floating Words
+  const floatingWords = useMemo(() => {
+    const words = ["Love", "XOXO", "Forever", "Cute", "Us", "Sweet"];
+    return [...Array(6)].map((_, i) => ({
+      id: i,
+      text: words[i % words.length],
+      left: `${10 + Math.random() * 80}%`,
+      top: `${10 + Math.random() * 60}%`,
+      delay: `${Math.random() * 5}s`,
       duration: `${10 + Math.random() * 10}s`
     }));
   }, []);
 
-  const renderFlowerSvg = (type: string) => {
+  const renderGardenItem = (type: string) => {
     switch(type) {
+      case 'rose':
+         return (
+            <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-sm">
+                <path d="M12 24V14" stroke="#15803d" strokeWidth="2" />
+                <path d="M12 14 L10 16 M12 18 L14 16" stroke="#15803d" strokeWidth="2" />
+                <circle cx="12" cy="10" r="6" className="fill-rose-600" />
+                <path d="M12 10l-2 -2m2 2l2 -2m-2 2l-2 2m2 -2l2 2" stroke="rgba(255,255,255,0.3)" />
+            </svg>
+         );
+      case 'heart':
+        return (
+          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full drop-shadow-sm">
+             <path d="M12 24V16" stroke="#166534" strokeWidth="1.5" />
+             <path d="M12 16C12 16 8 10 12 6C16 10 12 16 12 16Z" className="fill-pink-500" />
+             <path d="M6 10C6 10 9 13 12 16" stroke="none" /> 
+             {/* Actual Heart Shape Top */}
+             <path d="M12 16 C9 13 4 10 4 6 C4 3 7 2 9 4 C11 6 12 7 12 7 C12 7 13 6 15 4 C17 2 20 3 20 6 C20 10 15 13 12 16" className="fill-pink-400" />
+          </svg>
+        );
       case 'tulip':
         return (
           <svg viewBox="0 0 24 24" fill="none" className="w-full h-full drop-shadow-sm">
              <path d="M12 24V14" stroke="#166534" strokeWidth="2" />
              <path d="M12 24C12 24 16 20 16 16" stroke="#166534" strokeWidth="2" />
              <path d="M12 14V6" className="stroke-green-700" strokeWidth="1"/>
-             <path d="M8 6 C8 6 8 13 12 14 C16 13 16 6 16 6 C16 6 14 7 12 4 C10 7 8 6 8 6Z" className="fill-rose-400" />
+             <path d="M8 6 C8 6 8 13 12 14 C16 13 16 6 16 6 C16 6 14 7 12 4 C10 7 8 6 8 6Z" className="fill-red-500" />
           </svg>
         );
-      case 'daisy':
-        return (
-          <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-sm">
-             <path d="M12 24V12" stroke="#15803d" strokeWidth="2" />
-             <circle cx="12" cy="12" r="3" className="fill-yellow-400" />
-             <path d="M12 6L13 10H17L14 12L15 16L12 14L9 16L10 12L7 10H11L12 6Z" className="fill-white stroke-gray-100" strokeWidth="0.5" />
-          </svg>
-        );
-      case 'sunflower':
-         return (
-            <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-sm">
-                <path d="M12 24V14" stroke="#15803d" strokeWidth="2.5" />
-                <circle cx="12" cy="14" r="5" className="fill-amber-700" />
-                <circle cx="12" cy="14" r="8" className="stroke-yellow-500" strokeWidth="3" strokeDasharray="2 1" fill="none" />
-            </svg>
-         );
-      case 'lavender':
+      case 'heart_balloon':
          return (
             <svg viewBox="0 0 24 24" className="w-full h-full opacity-90">
-               <path d="M12 24V8" stroke="#15803d" strokeWidth="1.5" />
-               <circle cx="12" cy="8" r="1.5" className="fill-purple-400" />
-               <circle cx="12" cy="11" r="1.5" className="fill-purple-400" />
-               <circle cx="10" cy="13" r="1.5" className="fill-purple-400" />
-               <circle cx="14" cy="15" r="1.5" className="fill-purple-400" />
+               <path d="M12 24V14" stroke="#9ca3af" strokeWidth="1" strokeDasharray="2 1" />
+               <path d="M12 14 C9 11 5 8 5 5 C5 2 8 1 9.5 2.5 C11 4 12 5 12 5 C12 5 13 4 14.5 2.5 C16 1 19 2 19 5 C19 8 15 11 12 14Z" className="fill-rose-300" />
             </svg>
          );
       default: return null;
@@ -82,53 +97,61 @@ const GardenBackground: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-       {/* Gradient Ground */}
-       <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-emerald-100/60 via-emerald-50/20 to-transparent"></div>
+       {/* Gradient Ground - Changed to Pink/Red tones */}
+       <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-rose-200 via-pink-100/50 to-transparent"></div>
 
-       {/* Falling Petals */}
-       {petals.map((petal) => (
+       {/* Floating Words */}
+       {floatingWords.map((word) => (
          <div 
-           key={`petal-${petal.id}`}
-           className="absolute top-[-5%] text-pink-200/60 animate-float-slow"
+            key={`word-${word.id}`}
+            className="absolute text-pink-200/40 font-hand font-bold text-4xl animate-float-slow select-none"
+            style={{
+                left: word.left,
+                top: word.top,
+                animationDelay: word.delay,
+                animationDuration: word.duration
+            }}
+         >
+            {word.text}
+         </div>
+       ))}
+
+       {/* Falling Hearts */}
+       {floatingHearts.map((item) => (
+         <div 
+           key={`heart-${item.id}`}
+           className="absolute top-[-10%] text-pink-300/60 animate-float-slow"
            style={{
-             left: petal.left,
-             animationDelay: petal.delay,
-             animationDuration: petal.duration
+             left: item.left,
+             animationDelay: item.delay,
+             animationDuration: item.duration,
+             width: item.size,
+             height: item.size
            }}
          >
-           <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10 0C10 0 14 6 10 10C6 6 10 0 10 0Z" />
-           </svg>
+           <Heart fill="currentColor" stroke="none" className="w-full h-full" />
          </div>
        ))}
 
        {/* Garden Bed */}
        <div className="absolute bottom-[-10px] w-full flex justify-between items-end px-4 md:px-10">
-          {gardenFlowers.map((flower) => (
+          {gardenItems.map((item) => (
             <div
-              key={`flower-${flower.id}`}
+              key={`item-${item.id}`}
               className="relative animate-bloom origin-bottom"
               style={{
-                left: 'auto', // Handled by flex/margin or absolute if needed, but flex wrap is easier
+                left: 'auto',
                 width: '60px',
                 height: '80px',
-                animationDelay: flower.delay,
-                transform: `scale(${flower.scale})`
+                animationDelay: item.delay,
+                transform: `scale(${item.scale})`
               }}
             >
-               <div className="w-full h-full animate-sway origin-bottom" style={{ animationDuration: flower.duration }}>
-                 {renderFlowerSvg(flower.type)}
+               <div className="w-full h-full animate-sway origin-bottom" style={{ animationDuration: item.duration }}>
+                 {renderGardenItem(item.type)}
                </div>
             </div>
           ))}
-       </div>
-       
-       {/* Foreground Grass Blade Accents (Static SVG overlay) */}
-       <div className="absolute bottom-0 w-full h-12 opacity-30 text-emerald-600">
-          <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 100">
-             <path d="M0 100 L20 60 L40 100 L60 70 L80 100 M100 100 L110 50 L120 100" fill="none" stroke="currentColor" strokeWidth="2" />
-             <path d="M1100 100 L1120 40 L1140 100 L1160 60 L1180 100" fill="none" stroke="currentColor" strokeWidth="2" />
-          </svg>
        </div>
     </div>
   );
@@ -147,7 +170,13 @@ const App: React.FC = () => {
         audioRef.current.pause();
       } else {
         audioRef.current.volume = 0.5;
-        audioRef.current.play().catch(e => console.log("Playback failed", e));
+        // Promise handling for better debugging
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.error("Playback failed (interaction needed):", error);
+            });
+        }
       }
       setIsPlaying(!isPlaying);
     }
@@ -179,8 +208,13 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen font-sans text-gray-900 overflow-hidden relative selection:bg-pink-200">
       
-      {/* Background Audio Player */}
-      <audio ref={audioRef} src={BGM_URL} loop />
+      {/* Background Audio Player with Silent Error Handling */}
+      <audio 
+        ref={audioRef} 
+        src={BGM_URL} 
+        loop 
+        onError={() => console.log("Audio load failed. Check network or URL.")}
+      />
 
       {/* RENDER OPENING SEQUENCE OR APP */}
       {!hasStarted ? (
@@ -189,12 +223,12 @@ const App: React.FC = () => {
         <>
           {/* Header / Nav - Only visible after opening */}
           <nav className="fixed top-0 left-0 w-full p-6 z-50 flex justify-between items-center pointer-events-none animate-fade-in">
-            <div className="flex items-center gap-3 pointer-events-auto bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-sm border border-white/50">
-              <div className="bg-emerald-500 text-white p-2 rounded-full">
+            <div className="flex items-center gap-3 pointer-events-auto bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-sm border border-rose-200">
+              <div className="bg-rose-500 text-white p-2 rounded-full">
                 <Book size={20} />
               </div>
-              <h1 className="font-hand font-bold text-2xl tracking-wide text-gray-800 hidden sm:block">
-                MemoryLane
+              <h1 className="font-hand font-bold text-2xl tracking-wide text-rose-800 hidden sm:block">
+                My Valentine
               </h1>
             </div>
 
@@ -202,7 +236,7 @@ const App: React.FC = () => {
                 {/* Music Toggle */}
                 <button 
                     onClick={toggleMusic}
-                    className={`pointer-events-auto backdrop-blur-sm p-3 rounded-full shadow-sm transition-all duration-300 border border-white/50 ${isPlaying ? 'bg-rose-100 text-rose-600 animate-pulse' : 'bg-white/80 text-gray-600 hover:bg-white'}`}
+                    className={`pointer-events-auto backdrop-blur-sm p-3 rounded-full shadow-sm transition-all duration-300 border border-white/50 ${isPlaying ? 'bg-rose-500 text-white animate-pulse' : 'bg-white/80 text-rose-500 hover:bg-white'}`}
                     title={isPlaying ? "Pause Music" : "Play Music"}
                 >
                     {isPlaying ? <Music size={24} /> : <VolumeX size={24} />}
@@ -211,7 +245,7 @@ const App: React.FC = () => {
                 {/* Info Toggle */}
                 <button 
                 onClick={() => setShowInfo(!showInfo)}
-                className="pointer-events-auto bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-sm hover:bg-white transition-colors text-gray-600"
+                className="pointer-events-auto bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-sm hover:bg-white transition-colors text-rose-500"
                 >
                 <Info size={24} />
                 </button>
@@ -223,28 +257,28 @@ const App: React.FC = () => {
             <Flipbook sheets={INITIAL_SHEETS} />
           </main>
 
-          {/* NEW GARDEN BACKGROUND */}
-          <GardenBackground />
+          {/* NEW VALENTINE BACKGROUND */}
+          <ValentineBackground />
         </>
       )}
 
       {/* Info Modal */}
       {showInfo && (
         <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform scale-100 transition-all font-hand">
-            <h2 className="text-3xl font-bold mb-4 text-emerald-600">About MemoryLane</h2>
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform scale-100 transition-all font-hand border-2 border-rose-100">
+            <h2 className="text-3xl font-bold mb-4 text-rose-600">Our Love Story</h2>
             <p className="text-xl text-gray-700 mb-6">
-              Welcome to your digital garden of memories. 🌷
+              Welcome to this special Valentine's gift. 💖
               <br/><br/>
-              ✨ Click the pages or use arrow keys to flip.
+              ✨ Flip the pages to see our memories.
               <br/>
-              🎵 Enjoy the calming music.
+              🎵 Listen to the melody.
               <br/>
-              💖 Watch the flowers bloom!
+              🌹 Happy Valentine's Day!
             </p>
             <button 
               onClick={() => setShowInfo(false)}
-              className="w-full bg-emerald-700 text-white py-3 rounded-xl font-bold hover:bg-emerald-800 transition-colors"
+              className="w-full bg-rose-500 text-white py-3 rounded-xl font-bold hover:bg-rose-600 transition-colors"
             >
               Close Book
             </button>

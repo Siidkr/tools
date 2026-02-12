@@ -102,14 +102,16 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusi
                     
                     <p>
                         being with you tuh rasanya simple tapi meaningful. Kita nggak selalu perfect, but we always try, and that’s what matters. Kamu bukan cuma pacar, tapi juga best partner, tempat cerita, tempat pulang, dan orang yang selalu aku pilih.
+
+
                     </p>
 
                     <p>
-                        Semoga ke depan kita makin solid, makin dewasa, dan makin banyak memories bareng. No drama, just us, growing together. Happy monthsary, Bebekuhh. Glad to have you in my life
+                        Semoga ke depan kita makin solid, makin dewasa, dan makin banyak memories bareng. No drama, just us, growing together. Happy valentine day, Bebekuhh. Glad to have you in my life
                     </p>
 
                     <p className="text-right mt-8 text-rose-500 font-bold">
-                        With all my love,<br/>
+                        Your Lovely Bf,<br/>
                         Sidik
                     </p>
                 </div>
