@@ -9,7 +9,7 @@ interface FlipbookProps {
 }
 
 // Sound effect URL (Paper slide/turn)
-const PAGE_FLIP_SFX = "https://assets.mixkit.co/active_storage/sfx/2413/2413-preview.mp3";
+const PAGE_FLIP_SFX = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1770935217/Vietsub___Last_Night_On_Earth_-_Green_Day___Lyrics_Video_yn5fmk.mp3";
 
 // Placeholder Romantic Video URL
 const MEMORY_VIDEO_URL = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1769692681/us_fpfein.mov";
