@@ -45,8 +45,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fff0f5]', // Lavender Blush
       photos: [
         // Menggunakan foto user di halaman pertama juga
-        { id: 'p2_1', url: USER_PHOTO_URL, rotation: 4, caption: "Our Special Moment" },
-        { id: 'p2_2', url: 'https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?q=80&w=800&auto=format&fit=crop', rotation: -3, caption: "Nervous!" }
+        { id: 'p2_1', url: USER_PHOTO_URL, rotation: 4, caption: "Our First Meet" },
+        { id: 'p2_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3301_rblv1k.jpg', rotation: -3, caption: "Nervous" }
       ],
       stickers: [
         { id: 's5', type: 'rose', content: '', x: 8, y: 12, rotation: -25, scale: 1.1 },
@@ -62,7 +62,7 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-white',
       pattern: 'dots',
       photos: [
-         { id: 'p3_1', url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop', rotation: 2, caption: "Your smile <3" }
+         { id: 'p3_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4795_i8go0y.jpg', rotation: 2, caption: "Your smile <3" }
       ],
       text: "I knew you were special the moment I saw you laugh. My heart still skips a beat.",
       stickers: [
@@ -82,8 +82,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#ffe4e6]', // Rose-100
       pattern: 'dots',
       photos: [
-        { id: 'p4_1', url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop', rotation: -2, caption: "Brunch!" },
-        { id: 'p4_2', url: 'https://images.unsplash.com/photo-1595928607842-46c5753f8eb9?q=80&w=800&auto=format&fit=crop', rotation: 3, caption: "Latte Love" }
+        { id: 'p4_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3324_ax9on7.jpg', rotation: -2, caption: "Our first meal together" },
+        { id: 'p4_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4645_mufugg.jpg', rotation: 3, caption: "Sushi Date" }
       ],
       stickers: [
         { id: 's_lips_coffee', type: 'lips', x: 85, y: 10, rotation: 15, scale: 1 },
@@ -99,7 +99,7 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-white',
       pattern: 'none',
       photos: [],
-      text: "We might have spent too much money on food, but sharing meals with you is my favorite thing to do.",
+      text: "Somehow, every meal turns into a beautiful memory when I’m with you.",
       stickers: [
         { id: 's_sparkle_food', type: 'sparkle', x: 50, y: 80, rotation: 0, scale: 1.5 },
         { id: 's_tape_food', type: 'tape', x: 50, y: 5, rotation: -2, scale: 1 },
@@ -118,9 +118,9 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fce7f3]', // Pink-100
       pattern: 'grid',
       photos: [
-        { id: 'p6_1', url: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop', rotation: -4, caption: "Let's Go!" }
+        { id: 'p6_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4834_owmjol.jpg', rotation: -4, caption: "Movie Date" }
       ],
-      text: "Adventure awaits! I'd travel anywhere as long as I'm with you.",
+      text: "Two tickets, one story, and my favorite person by my side.",
       stickers: [
         { id: 's_heart_travel', type: 'heart', x: 80, y: 15, rotation: -15, scale: 1.2 },
         { id: 's_arrow_adv', type: 'arrow', x: 15, y: 70, rotation: 45, scale: 1 },
@@ -135,8 +135,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-white',
       pattern: 'hearts',
       photos: [
-        { id: 'p7_1', url: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800&auto=format&fit=crop', rotation: 5, caption: "Scenic View" },
-        { id: 'p7_2', url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop', rotation: -3, caption: "Beach Day" }
+        { id: 'p7_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3325_apudw6.jpg', rotation: 5, caption: "Our First Photobooth" },
+        { id: 'p7_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3314_zxsbty.jpg', rotation: -3, caption: "Mirror Selfie" }
       ],
       stickers: [
         { id: 's_sun', type: 'sparkle', x: 10, y: 10, rotation: 0, scale: 1.2 },
@@ -156,8 +156,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fdf2f8]', // Pink-50
       pattern: 'hearts',
       photos: [
-        { id: 'p8_1', url: 'https://images.unsplash.com/photo-1531747056595-07f6cbbe10bd?q=80&w=800&auto=format&fit=crop', rotation: 2, caption: "So serious?" },
-        { id: 'p8_2', url: 'https://images.unsplash.com/photo-1594750853509-c60317e33719?q=80&w=800&auto=format&fit=crop', rotation: -5, caption: "Blurry but happy" }
+        { id: 'p8_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4879_dtlgm3.jpg', rotation: 2, caption: "So serious? wkwk" },
+        { id: 'p8_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4863_xxhdty.jpg', rotation: -5, caption: "Our tired little date." }
       ],
       stickers: [
         { id: 's_bow_silly', type: 'bow', x: 85, y: 50, rotation: 10, scale: 1.3 },
@@ -192,9 +192,9 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#ffe4e6]',
       pattern: 'none',
       photos: [
-        { id: 'p10_1', url: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop', rotation: 3, caption: "Party time!" }
+        { id: 'p10_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4781_ebvmfk.jpg', rotation: 3, caption: "First Flower" }
       ],
-      text: "Every day with you feels like a celebration.",
+      text: "The first time I gave you flowers, and my heart was blooming too",
       stickers: [
         { id: 's_rose_party', type: 'rose', x: 10, y: 10, rotation: -10, scale: 1.2 },
         { id: 's_tulip_party', type: 'heart', x: 85, y: 60, rotation: 10, scale: 1.2 },
@@ -209,8 +209,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fff1f2]', // Rose-50
       pattern: 'dots',
       photos: [
-        { id: 'p11_1', url: 'https://images.unsplash.com/photo-1530103862676-de3c9a59af57?q=80&w=800&auto=format&fit=crop', rotation: -3, caption: "Cheers!" },
-        { id: 'p11_2', url: 'https://images.unsplash.com/photo-1482355347028-ff6de365e628?q=80&w=800&auto=format&fit=crop', rotation: 4, caption: "Gifts" }
+        { id: 'p11_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3312_oyj29r.jpg', rotation: -3, caption: "Cheers!" },
+        { id: 'p11_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3303_mkg3lj.jpg', rotation: 4, caption: "Gramedia" }
       ],
       stickers: [
         { id: 's_sparkle_party', type: 'sparkle', x: 50, y: 50, rotation: 0, scale: 1.5 },
@@ -230,8 +230,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fce7f3]', // Pink-100
       pattern: 'grid',
       photos: [
-        { id: 'p12_1', url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop', rotation: 2, caption: "Fresh air" },
-        { id: 'p12_2', url: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=800&auto=format&fit=crop', rotation: -2, caption: "Walks" }
+        { id: 'p12_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_5632_wkp2v5.jpg', rotation: 2, caption: "2nd Flowers" },
+        { id: 'p12_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_5626_a9top5.jpg', rotation: -2, caption: "Cute" }
       ],
       stickers: [
         { id: 's_flower', type: 'flower', x: 10, y: 80, rotation: 0, scale: 1.2 },
@@ -245,7 +245,7 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-white',
       pattern: 'hearts',
       photos: [
-        { id: 'p13_1', url: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=800&auto=format&fit=crop', rotation: 0, caption: "Sunset" }
+        { id: 'p13_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4808_iuuei1.jpg', rotation: 0, caption: "Holding hands" }
       ],
       text: "Quiet moments holding your hand are my favorite kind of moments.",
       stickers: [
@@ -265,7 +265,7 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fbcfe8]', // Pink-200
       pattern: 'dots',
       photos: [],
-      text: "I can't wait to see what the future holds for us. More travel, more laughter, and building our dream life together.",
+      text: "I can't wait to see what the future holds for us. May our future be gentle, our love be steady, and our dreams grow stronger together.",
       stickers: [
         { id: 's_rose_future', type: 'rose', x: 15, y: 15, rotation: -5, scale: 1.3 },
         { id: 's_heart_future', type: 'heart', x: 80, y: 80, rotation: 5, scale: 1.2 },
