@@ -280,8 +280,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fff0f5]',
       pattern: 'grid',
       photos: [
-        { id: 'p15_1', url: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=800&auto=format&fit=crop', rotation: 5, caption: "Goals" },
-        { id: 'p15_2', url: 'https://images.unsplash.com/photo-1524678606372-987d7e66c454?q=80&w=800&auto=format&fit=crop', rotation: -5, caption: "Someday" }
+        { id: 'p15_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4753_2_c7nsvk.jpg', rotation: 5, caption: "Us" },
+        { id: 'p15_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_4673_2_vuzhp6.jpg', rotation: -5, caption: "Always" }
       ],
       stickers: [
         { id: 's_star_future', type: 'sparkle', x: 50, y: 10, rotation: 0, scale: 1.5 },
@@ -301,8 +301,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#f43f5e]', // Rose-500 (Bold)
       pattern: 'hearts',
       photos: [
-        { id: 'p16_1', url: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop', rotation: 2, caption: "Kindness" },
-        { id: 'p16_2', url: 'https://images.unsplash.com/photo-1522543558187-768b6df7c25c?q=80&w=800&auto=format&fit=crop', rotation: -2, caption: "Warmth" }
+        { id: 'p16_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3405_2_d24ujn.jpg', rotation: 2, caption: "Love" },
+        { id: 'p16_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3406_2_zmvbpq.jpg', rotation: -2, caption: "Together" }
       ],
       stickers: [
         { id: 's_love_letter_9', type: 'letter', x: 10, y: 50, rotation: -15, scale: 1.2 },
@@ -318,7 +318,7 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-white',
       pattern: 'none',
       photos: [],
-      text: "1. Your laugh\n2. How you support me\n3. Your kindness to strangers\n4. Everything about you.",
+      text: "1. Your laugh\n2. How you support me\n3. Your kindness\n4. Everything about you.",
       stickers: [
         { id: 's_rose_9', type: 'rose', x: 80, y: 80, rotation: -20, scale: 1.4 },
         { id: 's_kiss_9', type: 'lips', x: 20, y: 10, rotation: 10, scale: 1 },
@@ -337,7 +337,7 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fce7f3]',
       pattern: 'hearts',
       photos: [
-        { id: 'p18_1', url: 'https://images.unsplash.com/photo-1511253247232-258d9299b486?q=80&w=800&auto=format&fit=crop', rotation: 3, caption: "Forever" }
+        { id: 'p18_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/IMG_4817_2_jdkogj.jpg', rotation: 3, caption: "Forever" }
       ],
       text: "You are my Valentine, today and always.",
       stickers: [
