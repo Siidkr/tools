@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Heart, ArrowRight } from 'lucide-react';
 
 interface OpeningSequenceProps {
@@ -9,6 +9,29 @@ interface OpeningSequenceProps {
 export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusicStart }) => {
   // States: 'closed' -> 'opening' (flap moves) -> 'reading' (letter slides out) -> 'exiting' (fade out)
   const [stage, setStage] = useState<'closed' | 'opening' | 'reading' | 'exiting'>('closed');
+  
+  // STATE untuk menampung posisi acak hati agar stabil (mengatasi Hydration Error)
+  const [floatingHearts, setFloatingHearts] = useState<Array<{
+    id: number;
+    left: string;
+    top: string;
+    delay: string;
+    scale: number;
+    size: number;
+  }>>([]);
+
+  useEffect(() => {
+    // Generate angka acak hanya setelah komponen di-mount di browser
+    const hearts = [...Array(6)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      scale: 0.5 + Math.random(),
+      size: 40 + Math.random() * 40
+    }));
+    setFloatingHearts(hearts);
+  }, []);
 
   const handleOpenEnvelope = () => {
     if (stage !== 'closed') return;
@@ -39,20 +62,20 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusi
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#fbcfe8_1px,transparent_1px)] [background-size:20px_20px]"></div>
       
-      {/* Floating Hearts Background */}
+      {/* Floating Hearts Background - Rendered from State */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {floatingHearts.map((heart) => (
           <div 
-            key={i}
+            key={heart.id}
             className="absolute text-pink-200/60 animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              transform: `scale(${0.5 + Math.random()})`
+              left: heart.left,
+              top: heart.top,
+              animationDelay: heart.delay,
+              transform: `scale(${heart.scale})`
             }}
           >
-            <Heart fill="currentColor" size={40 + Math.random() * 40} />
+            <Heart fill="currentColor" size={heart.size} />
           </div>
         ))}
       </div>

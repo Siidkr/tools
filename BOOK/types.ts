@@ -1,6 +1,6 @@
 export interface Sticker {
   id: string;
-  type: 'star' | 'heart' | 'flower' | 'emoji' | 'tape' | 'rose' | 'lips' | 'letter' | 'arrow' | 'sparkle' | 'bow' | 'butterfly' | 'swirl' | 'ticket';
+  type: 'star' | 'heart' | 'flower' | 'emoji' | 'tape' | 'rose' | 'lips' | 'letter' | 'arrow' | 'sparkle' | 'bow' | 'butterfly' | 'swirl' | 'ticket' | 'teddy';
   content?: string; // for emoji
   x: number; // percentage
   y: number; // percentage
