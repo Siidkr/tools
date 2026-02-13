@@ -1,23 +1,21 @@
 import { SheetData } from './types';
 
+// URL Foto User dengan parameter perbaikan format otomatis (f_auto) dan kualitas otomatis (q_auto)
+// Ini memperbaiki masalah gambar putih/blank pada browser.
+const USER_PHOTO_URL = "https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3313_pt4ezx.jpg";
+
 export const INITIAL_SHEETS: SheetData[] = [
-  // --- SHEET 1: FRONT COVER & INTRO ---
+  // --- SHEET 1: FRONT COVER (CLASSIC BOOK STYLE) & INTRO ---
   {
     front: {
       id: 'cover-front',
       pageNumber: 0,
       layout: 'cover',
-      bgColor: 'bg-[#be123c]', // Rose-700
-      photos: [], // Empty photos array for a text-only book cover
-      text: "HAPPY VALENTINE'S DAY",
-      subText: "To My Forever Valentine",
-      stickers: [
-        // Added floating hearts for the cover
-        { id: 's_cov_h1', type: 'heart', x: 15, y: 20, rotation: -15, scale: 0.8 },
-        { id: 's_cov_h2', type: 'heart', x: 85, y: 80, rotation: 15, scale: 0.8 },
-        // Added Cute Teddy Bear to Cover
-        { id: 's_cov_teddy', type: 'teddy', x: 82, y: 15, rotation: 10, scale: 1.2 }
-      ]
+      bgColor: 'bg-[#881337]', // Deep Rose-900 (Leather Book Color)
+      photos: [], // REMOVED PHOTO for classic book look
+      text: "Happy Valentine's Day",
+      subText: "Vol. I • A Story About Us",
+      stickers: [] // Minimal stickers for clean elegant cover
     },
     back: {
       id: 'p1',
@@ -46,8 +44,9 @@ export const INITIAL_SHEETS: SheetData[] = [
       pattern: 'hearts',
       bgColor: 'bg-[#fff0f5]', // Lavender Blush
       photos: [
-        { id: 'p2_1', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/IMG_3313_pt4ezx.jpg?q=80&w=800&auto=format&fit=crop', rotation: 4, caption: "First Date" },
-        { id: 'p2_2', url: 'https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?q=80&w=800&auto=format&fit=crop', rotation: -3, caption: "Nervous!" }
+        // Menggunakan foto user di halaman pertama juga
+        { id: 'p2_1', url: USER_PHOTO_URL, rotation: 4, caption: "First Meet" },
+        { id: 'p2_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3301_rblv1k.jpg', rotation: -3, caption: "Nervous!" }
       ],
       stickers: [
         { id: 's5', type: 'rose', content: '', x: 8, y: 12, rotation: -25, scale: 1.1 },
@@ -352,15 +351,14 @@ export const INITIAL_SHEETS: SheetData[] = [
       id: 'cover-back',
       pageNumber: 19,
       layout: 'cover',
-      bgColor: 'bg-[#be123c]', // Rose-700
+      bgColor: 'bg-[#881337]', // Deep Rose-900 (Matching Front Cover)
       photos: [],
-      text: "", 
-      subText: "Created with Love",
+      text: "Would you be my Valentine?", 
+      subText: "Say Yes? ❤️",
       stickers: [
-        { id: 's_end_heart', type: 'heart', x: 50, y: 40, rotation: 0, scale: 1.5 },
-        { id: 's_end_rose', type: 'rose', x: 50, y: 65, rotation: 90, scale: 1 },
-        // Added small letter
-        { id: 's_letter_end', type: 'letter', x: 85, y: 85, rotation: 10, scale: 1 }
+        // Adjusted positions to corners to clear center Note Card
+        { id: 's_end_heart', type: 'heart', x: 10, y: 10, rotation: -15, scale: 1 },
+        { id: 's_end_rose', type: 'rose', x: 85, y: 85, rotation: 0, scale: 1 }
       ]
     }
   }

@@ -2,156 +2,130 @@ import React, { useState, useRef, useMemo } from 'react';
 import { Flipbook } from './components/Flipbook';
 import { OpeningSequence } from './components/OpeningSequence';
 import { INITIAL_SHEETS } from './constants';
-import { Book, Info, Music, VolumeX, Heart } from 'lucide-react';
+import { Book, Info, Music, VolumeX, Heart, Sparkles } from 'lucide-react';
 
 // --- BACKGROUND MUSIC URL ---
-// Updated to user provided Cloudinary link: Green Day - Last Night On Earth
+// User provided Cloudinary link: Green Day - Last Night On Earth
 const BGM_URL = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1770935217/Vietsub___Last_Night_On_Earth_-_Green_Day___Lyrics_Video_yn5fmk.mp3";
 
-// --- VALENTINE BACKGROUND COMPONENT ---
+// --- ROMANTIC BACKGROUND COMPONENT ---
 const ValentineBackground: React.FC = () => {
-  // Generate random flowers/hearts for the bottom garden bed
-  const gardenItems = useMemo(() => {
-    const items = [];
-    const count = 18; // Number of items across the bottom
-    const types = ['rose', 'heart', 'tulip', 'heart_balloon'];
-    
-    for (let i = 0; i < count; i++) {
-      const type = types[Math.floor(Math.random() * types.length)];
-      items.push({
-        id: i,
-        type,
-        left: `${(i / count) * 100 + (Math.random() * 5 - 2)}%`, // Distribute across width
-        delay: `${Math.random() * 1.5}s`, // Random bloom delay
-        scale: 0.8 + Math.random() * 0.5,
-        duration: `${3 + Math.random() * 2}s` // Random sway speed
-      });
-    }
-    return items;
-  }, []);
-
-  // Generate falling hearts (instead of petals)
-  const floatingHearts = useMemo(() => {
-    return [...Array(12)].map((_, i) => ({
+  
+  // 1. Rising Hearts (Replacing Falling Hearts)
+  const risingHearts = useMemo(() => {
+    return [...Array(20)].map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 10}s`,
-      duration: `${8 + Math.random() * 8}s`,
-      size: 15 + Math.random() * 20
+      delay: `${Math.random() * 15}s`,
+      duration: `${15 + Math.random() * 10}s`,
+      scale: 0.5 + Math.random() * 0.8,
+      opacity: 0.3 + Math.random() * 0.4
     }));
   }, []);
 
-  // Floating Words
-  const floatingWords = useMemo(() => {
-    const words = ["Love", "XOXO", "Forever", "Cute", "Us", "Sweet"];
+  // 2. Bokeh/Light Orbs (Dreamy effect)
+  const lightOrbs = useMemo(() => {
     return [...Array(6)].map((_, i) => ({
       id: i,
-      text: words[i % words.length],
-      left: `${10 + Math.random() * 80}%`,
-      top: `${10 + Math.random() * 60}%`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${10 + Math.random() * 10}s`
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      size: `${200 + Math.random() * 300}px`,
+      duration: `${20 + Math.random() * 20}s`,
+      delay: `${Math.random() * 5}s`
     }));
   }, []);
 
-  const renderGardenItem = (type: string) => {
-    switch(type) {
-      case 'rose':
-         return (
-            <svg viewBox="0 0 24 24" className="w-full h-full drop-shadow-sm">
-                <path d="M12 24V14" stroke="#15803d" strokeWidth="2" />
-                <path d="M12 14 L10 16 M12 18 L14 16" stroke="#15803d" strokeWidth="2" />
-                <circle cx="12" cy="10" r="6" className="fill-rose-600" />
-                <path d="M12 10l-2 -2m2 2l2 -2m-2 2l-2 2m2 -2l2 2" stroke="rgba(255,255,255,0.3)" />
-            </svg>
-         );
-      case 'heart':
-        return (
-          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full drop-shadow-sm">
-             <path d="M12 24V16" stroke="#166534" strokeWidth="1.5" />
-             <path d="M12 16C12 16 8 10 12 6C16 10 12 16 12 16Z" className="fill-pink-500" />
-             <path d="M6 10C6 10 9 13 12 16" stroke="none" /> 
-             {/* Actual Heart Shape Top */}
-             <path d="M12 16 C9 13 4 10 4 6 C4 3 7 2 9 4 C11 6 12 7 12 7 C12 7 13 6 15 4 C17 2 20 3 20 6 C20 10 15 13 12 16" className="fill-pink-400" />
-          </svg>
-        );
-      case 'tulip':
-        return (
-          <svg viewBox="0 0 24 24" fill="none" className="w-full h-full drop-shadow-sm">
-             <path d="M12 24V14" stroke="#166534" strokeWidth="2" />
-             <path d="M12 24C12 24 16 20 16 16" stroke="#166534" strokeWidth="2" />
-             <path d="M12 14V6" className="stroke-green-700" strokeWidth="1"/>
-             <path d="M8 6 C8 6 8 13 12 14 C16 13 16 6 16 6 C16 6 14 7 12 4 C10 7 8 6 8 6Z" className="fill-red-500" />
-          </svg>
-        );
-      case 'heart_balloon':
-         return (
-            <svg viewBox="0 0 24 24" className="w-full h-full opacity-90">
-               <path d="M12 24V14" stroke="#9ca3af" strokeWidth="1" strokeDasharray="2 1" />
-               <path d="M12 14 C9 11 5 8 5 5 C5 2 8 1 9.5 2.5 C11 4 12 5 12 5 C12 5 13 4 14.5 2.5 C16 1 19 2 19 5 C19 8 15 11 12 14Z" className="fill-rose-300" />
-            </svg>
-         );
-      default: return null;
-    }
-  }
+  // 3. Shooting Stars (Occasional magic)
+  const shootingStars = useMemo(() => {
+    return [...Array(3)].map((_, i) => ({
+      id: i,
+      top: `${Math.random() * 40}%`,
+      left: `${50 + Math.random() * 50}%`,
+      delay: `${5 + Math.random() * 25}s`
+    }));
+  }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-       {/* Gradient Ground - Changed to Pink/Red tones */}
-       <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-rose-200 via-pink-100/50 to-transparent"></div>
+    <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden bg-[#fff0f5]">
+       
+       {/* 1. Base Gradient Layer - Deep Romantic Hues */}
+       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-200 via-rose-100 to-rose-50 opacity-60"></div>
+       <div className="absolute inset-0 bg-gradient-to-t from-rose-200/40 via-transparent to-transparent"></div>
 
-       {/* Floating Words */}
-       {floatingWords.map((word) => (
+       {/* 2. Moving Bokeh Orbs (Soft blobs) */}
+       {lightOrbs.map((orb) => (
          <div 
-            key={`word-${word.id}`}
-            className="absolute text-pink-200/40 font-hand font-bold text-4xl animate-float-slow select-none"
+            key={`orb-${orb.id}`}
+            className="absolute rounded-full bg-rose-300/20 blur-[80px] animate-float"
             style={{
-                left: word.left,
-                top: word.top,
-                animationDelay: word.delay,
-                animationDuration: word.duration
+                width: orb.size,
+                height: orb.size,
+                left: orb.left,
+                top: orb.top,
+                animationDuration: orb.duration,
+                animationDelay: orb.delay
             }}
-         >
-            {word.text}
-         </div>
+         />
        ))}
 
-       {/* Falling Hearts */}
-       {floatingHearts.map((item) => (
+       {/* 3. Rising Hearts (Like Lanterns) */}
+       {risingHearts.map((item) => (
          <div 
-           key={`heart-${item.id}`}
-           className="absolute top-[-10%] text-pink-300/60 animate-float-slow"
+           key={`rising-heart-${item.id}`}
+           className="absolute bottom-[-10%] text-rose-400 animate-float-up"
            style={{
              left: item.left,
              animationDelay: item.delay,
              animationDuration: item.duration,
-             width: item.size,
-             height: item.size
+             transform: `scale(${item.scale})`,
+             opacity: item.opacity
            }}
          >
-           <Heart fill="currentColor" stroke="none" className="w-full h-full" />
+           <Heart fill="currentColor" stroke="none" className="drop-shadow-glow" />
          </div>
        ))}
 
-       {/* Garden Bed */}
-       <div className="absolute bottom-[-10px] w-full flex justify-between items-end px-4 md:px-10">
-          {gardenItems.map((item) => (
-            <div
-              key={`item-${item.id}`}
-              className="relative animate-bloom origin-bottom"
-              style={{
-                left: 'auto',
-                width: '60px',
-                height: '80px',
-                animationDelay: item.delay,
-                transform: `scale(${item.scale})`
-              }}
-            >
-               <div className="w-full h-full animate-sway origin-bottom" style={{ animationDuration: item.duration }}>
-                 {renderGardenItem(item.type)}
-               </div>
-            </div>
-          ))}
+       {/* 4. Shooting Stars */}
+       {shootingStars.map((star) => (
+          <div 
+            key={`star-${star.id}`}
+            className="absolute w-[200px] h-[2px] bg-gradient-to-l from-transparent via-white to-transparent animate-shooting-star opacity-0"
+            style={{
+                top: star.top,
+                left: star.left,
+                animationDelay: star.delay
+            }}
+          >
+             {/* Glowing Head of Star */}
+             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1 bg-white shadow-[0_0_10px_2px_rgba(255,255,255,0.8)] rounded-full"></div>
+          </div>
+       ))}
+
+       {/* 5. Static Sparkles (Twinkling) */}
+       {[...Array(15)].map((_, i) => (
+          <div
+            key={`sparkle-${i}`}
+            className="absolute text-rose-300 animate-twinkle"
+            style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`
+            }}
+          >
+              <Sparkles size={10 + Math.random() * 10} strokeWidth={1} />
+          </div>
+       ))}
+
+       {/* 6. Soft Cloud Layer at Bottom (To ground the book) */}
+       <div className="absolute bottom-0 w-full h-32 opacity-60">
+           <svg viewBox="0 0 1440 320" className="w-full h-full preserve-3d">
+              <path fill="#ffffff" fillOpacity="0.6" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+           </svg>
+       </div>
+       <div className="absolute bottom-0 w-full h-24 opacity-40">
+           <svg viewBox="0 0 1440 320" className="w-full h-full preserve-3d">
+              <path fill="#fbcfe8" fillOpacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+           </svg>
        </div>
     </div>
   );
@@ -257,7 +231,7 @@ const App: React.FC = () => {
             <Flipbook sheets={INITIAL_SHEETS} />
           </main>
 
-          {/* NEW VALENTINE BACKGROUND */}
+          {/* NEW ROMANTIC BACKGROUND */}
           <ValentineBackground />
         </>
       )}
