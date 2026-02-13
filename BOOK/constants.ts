@@ -45,8 +45,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       bgColor: 'bg-[#fff0f5]', // Lavender Blush
       photos: [
         // Menggunakan foto user di halaman pertama juga
-        { id: 'p2_1', url: USER_PHOTO_URL, rotation: 4, caption: "First Meet" },
-        { id: 'p2_2', url: 'https://res.cloudinary.com/dpuwu7fna/image/upload/w_1000,c_limit,f_auto,q_auto/IMG_3301_rblv1k.jpg', rotation: -3, caption: "Nervous!" }
+        { id: 'p2_1', url: USER_PHOTO_URL, rotation: 4, caption: "Our Special Moment" },
+        { id: 'p2_2', url: 'https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?q=80&w=800&auto=format&fit=crop', rotation: -3, caption: "Nervous!" }
       ],
       stickers: [
         { id: 's5', type: 'rose', content: '', x: 8, y: 12, rotation: -25, scale: 1.1 },
