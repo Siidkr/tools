@@ -149,38 +149,33 @@ const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const toggleMusic = () => {
+  const toggleMusic = async () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
         audioRef.current.volume = 0.5;
-        // Promise handling for better debugging
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.error("Playback failed (interaction needed):", error);
-            });
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.error("Playback failed:", error);
         }
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
   // Called immediately when user clicks "Begin Journey"
-  const handleMusicStart = () => {
+  const handleMusicStart = async () => {
     if (audioRef.current) {
         audioRef.current.volume = 0.5;
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true);
-            })
-            .catch((error) => {
-              console.log("Auto-play prevented:", error);
-              setIsPlaying(false);
-            });
+        try {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        } catch (error) {
+          console.log("Auto-play prevented (browsers require interaction):", error);
+          setIsPlaying(false);
         }
     }
   };
@@ -198,6 +193,7 @@ const App: React.FC = () => {
         ref={audioRef} 
         src={BGM_URL} 
         loop 
+        preload="auto"
         onError={() => console.log("Audio load failed. Check network or URL.")}
       />
 
