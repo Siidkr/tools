@@ -94,23 +94,25 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusi
 
                 {/* Letter Text */}
                 <div className="font-hand text-gray-700 text-lg mt-4 space-y-4">
-                    <p className="font-bold text-2xl text-rose-600">My Dearest,</p>
+                    <p className="font-bold text-2xl text-rose-600">My Dearest, Nazala</p>
                     
                     <p>
-                        Welcome to our own little digital garden. I've collected our precious moments here—like pressing flowers in an old book—so they never fade.
+                        Nggak kerasa ya, time flies banget sejak kita bareng. Dari hal-hal kecil sampai momen random, semuanya jadi lebih seru karena ada kamu. Thanks for being here, for staying, and for making my days feel better.
                     </p>
                     
                     <p>
-                        Every page tells a part of our story, every photo holds a memory I cherish.
+                        being with you tuh rasanya simple tapi meaningful. Kita nggak selalu perfect, but we always try, and that’s what matters. Kamu bukan cuma pacar, tapi juga best partner, tempat cerita, tempat pulang, dan orang yang selalu aku pilih.
+
+
                     </p>
 
                     <p>
-                        Are you ready to walk down memory lane with me?
+                        Semoga ke depan kita makin solid, makin dewasa, dan makin banyak memories bareng. No drama, just us, growing together. Happy valentine day, Bebekuhh. Glad to have you in my life
                     </p>
 
                     <p className="text-right mt-8 text-rose-500 font-bold">
-                        With all my love,<br/>
-                        Us
+                        Your Lovely Bf,<br/>
+                        Sidik
                     </p>
                 </div>
 
