@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Heart, ArrowRight } from 'lucide-react';
 
 interface OpeningSequenceProps {
@@ -9,6 +9,21 @@ interface OpeningSequenceProps {
 export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusicStart }) => {
   // States: 'closed' -> 'opening' (flap moves) -> 'reading' (letter slides out) -> 'exiting' (fade out)
   const [stage, setStage] = useState<'closed' | 'opening' | 'reading' | 'exiting'>('closed');
+  
+  // Hydration Safe Random Particles
+  const [floatingHearts, setFloatingHearts] = useState<{id: number, left: string, top: string, delay: string, scale: number}[]>([]);
+
+  useEffect(() => {
+    // Generate random values only on client-side
+    const hearts = [...Array(6)].map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      scale: 0.5 + Math.random()
+    }));
+    setFloatingHearts(hearts);
+  }, []);
 
   const handleOpenEnvelope = () => {
     if (stage !== 'closed') return;
@@ -41,18 +56,18 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusi
       
       {/* Floating Hearts Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
+        {floatingHearts.map((heart) => (
           <div 
-            key={i}
+            key={heart.id}
             className="absolute text-pink-200/60 animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              transform: `scale(${0.5 + Math.random()})`
+              left: heart.left,
+              top: heart.top,
+              animationDelay: heart.delay,
+              transform: `scale(${heart.scale})`
             }}
           >
-            <Heart fill="currentColor" size={40 + Math.random() * 40} />
+            <Heart fill="currentColor" size={40} />
           </div>
         ))}
       </div>
@@ -94,25 +109,23 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusi
 
                 {/* Letter Text */}
                 <div className="font-hand text-gray-700 text-lg mt-4 space-y-4">
-                    <p className="font-bold text-2xl text-rose-600">My Dearest, Nazala</p>
+                    <p className="font-bold text-2xl text-rose-600">My Dearest,</p>
                     
                     <p>
-                        Nggak kerasa ya, time flies banget sejak kita bareng. Dari hal-hal kecil sampai momen random, semuanya jadi lebih seru karena ada kamu. Thanks for being here, for staying, and for making my days feel better.
+                        Welcome to our own little digital garden. I've collected our precious moments here—like pressing flowers in an old book—so they never fade.
                     </p>
                     
                     <p>
-                        being with you tuh rasanya simple tapi meaningful. Kita nggak selalu perfect, but we always try, and that’s what matters. Kamu bukan cuma pacar, tapi juga best partner, tempat cerita, tempat pulang, dan orang yang selalu aku pilih.
-
-
+                        Every page tells a part of our story, every photo holds a memory I cherish.
                     </p>
 
                     <p>
-                        Semoga ke depan kita makin solid, makin dewasa, dan makin banyak memories bareng. No drama, just us, growing together. Happy valentine day, Bebekuhh. Glad to have you in my life
+                        Are you ready to walk down memory lane with me?
                     </p>
 
                     <p className="text-right mt-8 text-rose-500 font-bold">
-                        Your Lovely Bf,<br/>
-                        Sidik
+                        With all my love,<br/>
+                        Us
                     </p>
                 </div>
 

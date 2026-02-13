@@ -73,10 +73,10 @@ export const ScrapbookPage: React.FC<ScrapbookPageProps> = ({ data, isActive }) 
               {/* Book Footer / Barcode */}
               <div className="absolute bottom-12 flex flex-col items-center gap-2 opacity-60">
                   <div className="font-mono text-[10px] text-amber-200 tracking-[0.3em] uppercase">Limited Edition • 2025</div>
-                  {/* Fake Barcode */}
+                  {/* Fake Barcode - FIXED: Using inline styles for width to avoid Tailwind JIT issues */}
                   <div className="flex items-end gap-[2px] h-8 mix-blend-screen opacity-80">
                       {[4,2,3,1,4,2,1,3,2,4,1,2,3,4,2,1].map((w, i) => (
-                          <div key={i} className={`bg-amber-100 w-${w} h-full`}></div>
+                          <div key={i} className="bg-amber-100 h-full" style={{ width: `${w * 3}px` }}></div>
                       ))}
                   </div>
               </div>
