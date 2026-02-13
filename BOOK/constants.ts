@@ -13,8 +13,8 @@ export const INITIAL_SHEETS: SheetData[] = [
       layout: 'cover',
       bgColor: 'bg-[#881337]', // Deep Rose-900 (Leather Book Color)
       photos: [], // REMOVED PHOTO for classic book look
-      text: "Happy Valentine's Day",
-      subText: "Vol. I • A Story About Us",
+      text: "Our Love Story",
+      subText: "Valentine's Edition • 2025",
       stickers: [] // Minimal stickers for clean elegant cover
     },
     back: {
@@ -353,12 +353,11 @@ export const INITIAL_SHEETS: SheetData[] = [
       layout: 'cover',
       bgColor: 'bg-[#881337]', // Deep Rose-900 (Matching Front Cover)
       photos: [],
-      text: "Would you be my Valentine?", 
-      subText: "Say Yes? ❤️",
+      text: "", 
+      subText: "Created with Love",
       stickers: [
-        // Adjusted positions to corners to clear center Note Card
-        { id: 's_end_heart', type: 'heart', x: 10, y: 10, rotation: -15, scale: 1 },
-        { id: 's_end_rose', type: 'rose', x: 85, y: 85, rotation: 0, scale: 1 }
+        { id: 's_end_heart', type: 'heart', x: 50, y: 40, rotation: 0, scale: 1.5 },
+        { id: 's_end_rose', type: 'rose', x: 50, y: 65, rotation: 90, scale: 1 }
       ]
     }
   }

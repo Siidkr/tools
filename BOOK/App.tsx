@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { Flipbook } from './components/Flipbook';
 import { OpeningSequence } from './components/OpeningSequence';
 import { INITIAL_SHEETS } from './constants';
@@ -11,48 +11,38 @@ const BGM_URL = "https://res.cloudinary.com/dpuwu7fna/video/upload/v1770935217/V
 // --- ROMANTIC BACKGROUND COMPONENT ---
 const ValentineBackground: React.FC = () => {
   
-  // States for stable random values
-  const [risingHearts, setRisingHearts] = useState<any[]>([]);
-  const [lightOrbs, setLightOrbs] = useState<any[]>([]);
-  const [shootingStars, setShootingStars] = useState<any[]>([]);
-  const [sparkles, setSparkles] = useState<any[]>([]);
-
-  useEffect(() => {
-    // 1. Rising Hearts
-    setRisingHearts([...Array(20)].map((_, i) => ({
+  // 1. Rising Hearts (Replacing Falling Hearts)
+  const risingHearts = useMemo(() => {
+    return [...Array(20)].map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       delay: `${Math.random() * 15}s`,
       duration: `${15 + Math.random() * 10}s`,
       scale: 0.5 + Math.random() * 0.8,
       opacity: 0.3 + Math.random() * 0.4
-    })));
+    }));
+  }, []);
 
-    // 2. Bokeh/Light Orbs
-    setLightOrbs([...Array(6)].map((_, i) => ({
+  // 2. Bokeh/Light Orbs (Dreamy effect)
+  const lightOrbs = useMemo(() => {
+    return [...Array(6)].map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       size: `${200 + Math.random() * 300}px`,
       duration: `${20 + Math.random() * 20}s`,
       delay: `${Math.random() * 5}s`
-    })));
+    }));
+  }, []);
 
-    // 3. Shooting Stars
-    setShootingStars([...Array(3)].map((_, i) => ({
+  // 3. Shooting Stars (Occasional magic)
+  const shootingStars = useMemo(() => {
+    return [...Array(3)].map((_, i) => ({
       id: i,
       top: `${Math.random() * 40}%`,
       left: `${50 + Math.random() * 50}%`,
       delay: `${5 + Math.random() * 25}s`
-    })));
-
-    // 4. Sparkles
-    setSparkles([...Array(15)].map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`
-    })));
+    }));
   }, []);
 
   return (
@@ -112,14 +102,14 @@ const ValentineBackground: React.FC = () => {
        ))}
 
        {/* 5. Static Sparkles (Twinkling) */}
-       {sparkles.map((sparkle) => (
+       {[...Array(15)].map((_, i) => (
           <div
-            key={`sparkle-${sparkle.id}`}
+            key={`sparkle-${i}`}
             className="absolute text-rose-300 animate-twinkle"
             style={{
-                left: sparkle.left,
-                top: sparkle.top,
-                animationDelay: sparkle.delay
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`
             }}
           >
               <Sparkles size={10 + Math.random() * 10} strokeWidth={1} />

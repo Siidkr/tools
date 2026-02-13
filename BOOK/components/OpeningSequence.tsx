@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Heart, ArrowRight } from 'lucide-react';
 
 interface OpeningSequenceProps {
@@ -9,21 +9,6 @@ interface OpeningSequenceProps {
 export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusicStart }) => {
   // States: 'closed' -> 'opening' (flap moves) -> 'reading' (letter slides out) -> 'exiting' (fade out)
   const [stage, setStage] = useState<'closed' | 'opening' | 'reading' | 'exiting'>('closed');
-  
-  // Hydration Safe Random Particles
-  const [floatingHearts, setFloatingHearts] = useState<{id: number, left: string, top: string, delay: string, scale: number}[]>([]);
-
-  useEffect(() => {
-    // Generate random values only on client-side
-    const hearts = [...Array(6)].map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 5}s`,
-      scale: 0.5 + Math.random()
-    }));
-    setFloatingHearts(hearts);
-  }, []);
 
   const handleOpenEnvelope = () => {
     if (stage !== 'closed') return;
@@ -56,18 +41,18 @@ export const OpeningSequence: React.FC<OpeningSequenceProps> = ({ onOpen, onMusi
       
       {/* Floating Hearts Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {floatingHearts.map((heart) => (
+        {[...Array(6)].map((_, i) => (
           <div 
-            key={heart.id}
+            key={i}
             className="absolute text-pink-200/60 animate-float"
             style={{
-              left: heart.left,
-              top: heart.top,
-              animationDelay: heart.delay,
-              transform: `scale(${heart.scale})`
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              transform: `scale(${0.5 + Math.random()})`
             }}
           >
-            <Heart fill="currentColor" size={40} />
+            <Heart fill="currentColor" size={40 + Math.random() * 40} />
           </div>
         ))}
       </div>
