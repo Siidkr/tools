@@ -209,7 +209,7 @@ const App: React.FC = () => {
                 <Book size={20} />
               </div>
               <h1 className="font-hand font-bold text-2xl tracking-wide text-rose-800 hidden sm:block">
-                My Valentine
+                Happy Valentine Days
               </h1>
             </div>
 
